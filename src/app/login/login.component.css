@@ -1,0 +1,34 @@
+.login{
+    background-color: #ffffff;
+    border:1px black;
+  }
+  .width-100{
+    width: 100%;
+  }
+  
+  
+    .form{
+      margin-top: 30%;
+      opacity: 0.9;
+    
+        padding:5 px;
+        align-content: center;
+    }
+    .background{
+         background-image: Url("https://media4.s-nbcnews.com/i/newscms/2017_26/2053956/170627-better-grocery-store-main-se-539p_80a9ba9c8d466788799ca27568ee0d43.jpg");
+      /*  background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-color: lightgray; */
+       
+        
+    }
+    .height-100{
+      height: 100%;
+    }
+    .width{
+      width: 90%;
+    }
+    img{
+      width: 100%;
+      height: 100%;
+    }
