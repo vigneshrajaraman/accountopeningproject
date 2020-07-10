@@ -9,7 +9,7 @@ import { FormBuilder } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   constructor(private fb:FormBuilder) { }
-falg=false;
+flag=false;
   form;
   ngOnInit(): void {
     this.form=this.fb.group({
