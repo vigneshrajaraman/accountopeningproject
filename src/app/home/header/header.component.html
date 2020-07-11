@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>Account Opening Application</span>
+    <span class="example-spacer"></span>
+    <div style="padding:0.5cm ;"><small><b>user:</b> {{username}}</small><br><small><b>Roles:</b> {{roles}}</small>
+        <br>
+    </div>
+    <button mat-flat-button color="accent" (click)=logout()>Sign out</button>
+
+</mat-toolbar>

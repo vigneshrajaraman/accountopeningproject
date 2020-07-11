@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from './service/login.service';
-import { error } from 'console';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { error } from 'console';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private service: LoginService) { }
+  constructor(private fb: FormBuilder, private service: LoginService, private route:Router) { }
   flag = false;
   form;
   ngOnInit(): void {
@@ -37,7 +37,9 @@ export class LoginComponent implements OnInit {
         roles+=",";
         roles+=role.authority;
       })
-      localStorage.setItem("roles",roles)
+      localStorage.setItem("username", this.username.value)
+      localStorage.setItem("roles",roles);
+      this.route.navigate(["home"])
     },error=>{
       this.flag=true; 
     }
