@@ -11,11 +11,11 @@
             <form [formGroup]="form">
                 <mat-form-field class="width-100" appearance="outline">
                     <mat-label>UserName</mat-label>
-                    <input matInput placeholder="Enter here UserName" required formControlName="userName">
-                    <div style=" text-align: right;" *ngIf="userName.invalid && userName.touched"
+                    <input matInput placeholder="Enter here UserName" required formControlName="username">
+                    <div style=" text-align: right;" *ngIf="username.invalid && username.touched"
                         class="text-danger">
-                        <small *ngIf="userName.errors?.required"> UserName is Requried</small>
-                        <small *ngIf="userName.errors?.minlength">UserName have to minimum length is 3
+                        <small *ngIf="username.errors?.required"> UserName is Requried</small>
+                        <small *ngIf="username.errors?.minlength">UserName have to minimum length is 3
                             char</small>
                     </div>
                 </mat-form-field>
