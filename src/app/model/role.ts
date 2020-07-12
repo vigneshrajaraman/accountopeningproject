@@ -1,3 +1,3 @@
-export interface Role{
+export class Role{
     authority:string;
 }

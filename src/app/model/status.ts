@@ -1,0 +1,3 @@
+export enum Status{
+    REJECT, APPROVE, REWORK, CANCEL, SUBMIT, RESUBMITT
+}

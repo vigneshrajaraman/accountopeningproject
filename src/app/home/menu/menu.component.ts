@@ -8,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class MenuComponent implements OnInit {
 
   constructor() { }
+roles:string;
+role:string[];
 
   ngOnInit(): void {
+    this.roles=localStorage.getItem("roles")
+    this.role=this.roles.split(",");
+    
   }
 
 }

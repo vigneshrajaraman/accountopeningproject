@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       })
       localStorage.setItem("username", this.username.value)
       localStorage.setItem("roles",roles);
-      this.route.navigate(["home"])
+      this.route.navigate(["aoa"])
     },error=>{
       this.flag=true; 
     }
