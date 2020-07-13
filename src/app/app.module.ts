@@ -15,6 +15,8 @@ import { FooterComponent } from './home/footer/footer.component';
 import { MenuComponent } from './home/menu/menu.component';
 import { BodyComponent } from './home/body/body.component';
 import { CreateAccountComponent } from './home/body/create-account/create-account.component';
+import  {MatCurrencyFormatModule} from 'mat-currency-format';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { CreateAccountComponent } from './home/body/create-account/create-accoun
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule,
+    MatCurrencyFormatModule
   ],
   providers: [HttpInterceptorProviders],
   bootstrap: [AppComponent]

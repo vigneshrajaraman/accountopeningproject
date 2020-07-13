@@ -14,7 +14,7 @@ export class InterceptorService implements HttpInterceptor {
     var req;
     console.log(token)
     if (token) {
-      req = request.clone({ headers: request.headers.set('auth', token) })
+      req = request.clone({ headers: request.headers.set('Authorization', token) })
     }
     else{
       req= request.clone();
