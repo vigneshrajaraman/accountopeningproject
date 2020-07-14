@@ -8,7 +8,7 @@ export class Application{
     customer:Customer;
     accountType:AccountType;
     cadeType:CardType;
-	overeseasAccount:boolean;
+	overeseasAccount:string;
 	createUser:string;
 	createDate:Date;
 	lastModifiedUser:string;

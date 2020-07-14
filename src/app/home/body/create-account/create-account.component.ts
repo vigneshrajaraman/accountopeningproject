@@ -9,6 +9,7 @@ import { AppServiceService } from '../service/app-service.service';
 import { EmployeeType } from 'src/app/model/employeeType';
 import { AccountType } from 'src/app/model/accountType';
 import { CardType } from 'src/app/model/cardType';
+import { Application } from 'src/app/model/application';
 
 @Component({
   selector: 'app-create-account',
@@ -31,6 +32,7 @@ export class CreateAccountComponent implements OnInit {
   accountTypes: AccountType[];
   cardTypes: CardType[];
   enableSpinner;
+  application: Application;
   ngOnInit(): void {
     this.employeeForm = this.fb.group({
       employeeId: [''],
@@ -151,6 +153,7 @@ export class CreateAccountComponent implements OnInit {
     }
   }
   errorFlagApplication;
+
   onApplicationSubmit() {
     console.log("applicationForm", this.applicationForm.valid)
     console.log(this.applicationForm.value);
@@ -160,10 +163,13 @@ export class CreateAccountComponent implements OnInit {
     } else {
       this.errorFlagApplication = false;
       console.log(this.applicationForm.value)
-      this.enableSpinner=true;
-      this.service.insertApplication(this.applicationForm.value).subscribe(data=>{
-        console.log(data);
-        this.enableSpinner=false;
+      this.enableSpinner = true;
+      this.applicationForm.get("createUser").setValue(localStorage.getItem('username'));
+      this.applicationForm.get('createDate').setValue(new Date());
+      this.service.insertApplication(this.applicationForm.value).subscribe(data => {
+        this.enableSpinner = false;
+        console.log(data)
+        this.application = data;
       });
 
     }

@@ -1,4 +1,4 @@
-<mat-horizontal-stepper #stepper>
+<mat-horizontal-stepper  #stepper>
   <mat-step [stepControl]="customerForm">
     <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
       <ng-template matStepLabel>Fill out your customer details</ng-template>
@@ -165,5 +165,21 @@
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>
     <mat-spinner *ngIf="enableSpinner"></mat-spinner>
+    <table *ngIf="!enableSpinner">
+      <tr>
+        <td><b>Application Id:</b></td>
+        <td>{{application?application.applicationNo:""}}</td>
+      </tr>
+      <tr>
+        <td><b>Customer Id:</b></td>
+        <td>{{application?application.customer?application.customer.customerId:"":""}}</td>
+      </tr>
+      <tr>
+        <td><b>Employee Id:</b></td>
+        <td>{{application?application.customer?application.customer.employee?application.customer.employee.employeeId:"":"":""}}</td>
+      </tr>
+    </table>
+    
+    
   </mat-step>
 </mat-horizontal-stepper>

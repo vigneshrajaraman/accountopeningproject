@@ -8,13 +8,13 @@
     </div>
     <div *ngIf="role.includes('ROLE_dataentery')">
         <mat-list-item>
-            <a mat-flat-button href="https://www.google.com/" style="color:#ff4081;" target="_blank"><b>Rework</b></a>
+            <a mat-flat-button routerLink="verifier" style="color:#ff4081;" target="_blank"><b>Rework</b></a>
         </mat-list-item>
         <mat-divider></mat-divider>
     </div>
     <div *ngIf="role.includes('ROLE_dataverifier')">
         <mat-list-item>
-            <a mat-flat-button href="https://www.google.com/" style="color:#ff4081;" target="_blank"><b>verfier</b></a>
+            <a mat-flat-button routerLink="verifier" style="color:#ff4081;" ><b>verfier</b></a>
         </mat-list-item>
         <mat-divider></mat-divider>
     </div>

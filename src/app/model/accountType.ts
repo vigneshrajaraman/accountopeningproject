@@ -1,4 +1,4 @@
-export class AccountType{
+export interface AccountType{
     accountTypeId:string;
 	accountTypeName:string;
 }

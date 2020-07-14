@@ -16,6 +16,8 @@ import { MenuComponent } from './home/menu/menu.component';
 import { BodyComponent } from './home/body/body.component';
 import { CreateAccountComponent } from './home/body/create-account/create-account.component';
 import  {MatCurrencyFormatModule} from 'mat-currency-format';
+import { VerfierComponent } from './home/body/verfier/verfier.component';
+import { VerfierDialogComponent } from './home/body/verfier/verfier-dialog/verfier-dialog.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import  {MatCurrencyFormatModule} from 'mat-currency-format';
     FooterComponent,
     MenuComponent,
     BodyComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    VerfierComponent,
+    VerfierDialogComponent
   ],
   imports: [
     BrowserModule,
