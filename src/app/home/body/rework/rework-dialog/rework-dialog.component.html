@@ -1,0 +1,165 @@
+<mat-horizontal-stepper  #stepper>
+    <mat-step [stepControl]="customerForm">
+      <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+        <ng-template matStepLabel>Update your customer details</ng-template>
+        <mat-form-field appearance="outline">
+          <mat-label>FirstName</mat-label>
+          <input matInput placeholder="enter your firstName" formControlName="firstName" required>
+          <div style=" text-align: right;" *ngIf="firstName.invalid && firstName.touched || errrorflagCustomer"
+            class="text-danger">
+            <small *ngIf="firstName.errors?.required"> FirstNmae is Required</small>
+          </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>MiddleName</mat-label>
+          <input matInput placeholder="enter your middleName" formControlName="middleName" required>
+          <div style=" text-align: right;" *ngIf="middleName.invalid && middleName.touched || errrorflagCustomer"
+            class="text-danger">
+            <small *ngIf="middleName.errors?.required"> MiddleName is Required</small>
+          </div>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>LastName</mat-label>
+          <input matInput placeholder="enter your lastName" formControlName="lastName" required>
+          <div style=" text-align: right;" *ngIf="lastName.invalid && lastName.touched || errrorflagCustomer"
+            class="text-danger">
+            <small *ngIf="lastName.errors?.required"> lastName is Required</small>
+          </div>
+        </mat-form-field>
+        <div style="margin-left: 10px;">
+          <label>Gender: </label>
+          <mat-radio-group formControlName="gender">
+            <mat-radio-button *ngFor="let gen of genders" [value]="gen">{{gen}}</mat-radio-button>
+          </mat-radio-group>
+          <div *ngIf="gender.invalid && gender.touched || errrorflagCustomer" class="text-danger">
+            <small *ngIf="gender.errors?.required"> Gender is Required</small>
+          </div>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Age</mat-label>
+          <input matInput placeholder="enter your Age" formControlName="age" required>
+          <div style=" text-align: right;" *ngIf="age.invalid && age.touched || errrorflagCustomer" class="text-danger">
+            <small *ngIf="age.errors?.required"> Age is Required</small>
+            <small *ngIf="age.errors?.pattern"> Age has to between 0 to 99</small>
+  
+          </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Correspondence Address</mat-label>
+          <textarea formControlName="correspondenceAddress" matInput
+            placeholder="enter your Correspondence Address"></textarea>
+          <div style=" text-align: right;"
+            *ngIf="correspondenceAddress.invalid && correspondenceAddress.touched || errrorflagCustomer"
+            class="text-danger">
+            <small *ngIf="correspondenceAddress.errors?.required"> Correspondence Address is Required</small>
+          </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>present Address </mat-label>
+          <textarea formControlName="presentAddress" matInput placeholder="enter your Correspondence Address"></textarea>
+          <div style=" text-align: right;" *ngIf="presentAddress.invalid && presentAddress.touched || errrorflagCustomer"
+            class="text-danger">
+            <small *ngIf="presentAddress.errors?.required"> Present Address is Required</small>
+          </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Permanent Address</mat-label>
+          <textarea formControlName="permanentAddress" matInput
+            placeholder="enter your permanentAddress Address"></textarea>
+          <div style=" text-align: right;"
+            *ngIf="permanentAddress.invalid && permanentAddress.touched || errrorflagCustomer" class="text-danger">
+            <small *ngIf="permanentAddress.errors?.required"> Permanent Address is Required</small>
+          </div>
+        </mat-form-field>
+  
+        <div align="end" style="padding-right: 10px;">
+          <button mat-raised-button matStepperNext color="primary">Next</button>
+        </div>
+      </form>
+    </mat-step>
+  
+    <mat-step [stepControl]="employeeForm">
+      <form [formGroup]="employeeForm" (ngSubmit)="onEmployeeSubmit()">
+        <ng-template matStepLabel>Update Employee details of customer</ng-template>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="enter your firstName" formControlName="firstName">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Designation</mat-label>
+          <input matInput placeholder="enter your Designation" formControlName="designation" required>
+          <div style=" text-align: right;" *ngIf="designation.invalid && designation.touched || errorFlagEmployee"
+            class="text-danger">
+            <small *ngIf="designation.errors?.required"> Designation is Required</small>
+          </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Employee Type</mat-label>
+          <mat-select formControlName="employeeType">
+            <mat-option *ngFor="let type of employeeTypes" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>salary</mat-label>
+          <input matInput placeholder="enter your salary" mvndrMatCurrencyFormat [allowNegative]="false"
+            [currencyCode]="'INR'" [value]="usAmount" (blur)="updateUSAmount($event)" required formControlName="salary">
+          <div style=" text-align: right;" *ngIf="salary.invalid && salary.touched || errorFlagEmployee"
+            class="text-danger">
+            <small *ngIf="salary.errors?.required"> salary is Required</small>
+          </div>
+        </mat-form-field>
+  
+        <div align="end">
+          <button mat-raised-button matStepperPrevious color="primary">previous</button>
+          <button mat-raised-button matStepperNext color="primary">Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="applicationForm">
+      <form [formGroup]="applicationForm" (ngSubmit)="onApplicationSubmit()">
+        <ng-template matStepLabel>Update Application details</ng-template>
+        <mat-form-field appearance="outline">
+          <mat-label>Account Type</mat-label>
+          <mat-select formControlName="accountType">
+            <mat-option *ngFor="let type of accountTypes" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+          <div style=" text-align: right;" *ngIf="accountType.invalid && accountType.touched || errorFlagApplication"
+            class="text-danger">
+            <small *ngIf="accountType.errors?.required"> Account Type is Required</small>
+          </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Card Type</mat-label>
+          <mat-select formControlName="cardType">
+            <mat-option *ngFor="let type of cardTypes" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+          <div style=" text-align: right;" *ngIf="cardType.invalid && cardType.touched || errorFlagApplication"
+            class="text-danger">
+            <small *ngIf="cardType.errors?.required"> Card Type is Required</small>
+          </div>
+        </mat-form-field>
+        <div style="margin-left: 10px;">
+          <label>Overeseas Account: </label>
+          <mat-radio-group formControlName="overeseasAccount">
+            <mat-radio-button  value="true">Yes</mat-radio-button>
+            <mat-radio-button  value="false">No</mat-radio-button>
+          </mat-radio-group>
+          <div *ngIf="overeseasAccount.invalid && overeseasAccount.touched || errorFlagApplication" class="text-danger">
+            <small *ngIf="overeseasAccount.errors?.required"> Overeseas Account is Required</small>
+          </div>
+        </div>
+        <div align="end">
+          <button mat-raised-button matStepperPrevious color="primary">previous</button>
+          <button mat-raised-button matStepperNext color="primary">Submit</button>
+        </div>
+      </form>
+    </mat-step>
+  
+  </mat-horizontal-stepper>

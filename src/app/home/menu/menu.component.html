@@ -8,7 +8,7 @@
     </div>
     <div *ngIf="role.includes('ROLE_dataentery')">
         <mat-list-item>
-            <a mat-flat-button routerLink="verifier" style="color:#ff4081;" target="_blank"><b>Rework</b></a>
+            <a mat-flat-button routerLink="rework" style="color:#ff4081;" ><b>Rework</b></a>
         </mat-list-item>
         <mat-divider></mat-divider>
     </div>
@@ -20,7 +20,7 @@
     </div>
     <div *ngIf="role.includes('ROLE_dataverifier') || role.includes('ROLE_dataentery')">
         <mat-list-item>
-            <a mat-flat-button href="https://www.google.com/" style="color:#ff4081;" target="_blank"><b>Search</b></a>
+            <a mat-flat-button routerLink="search" style="color:#ff4081;"><b>Search</b></a>
         </mat-list-item>
     </div>
 </mat-list>

@@ -1,63 +1,61 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Application } from 'src/app/model/application';
-import { Gender } from 'src/app/model/gender';
-import { EmployeeType } from 'src/app/model/employeeType';
-import { AccountType } from 'src/app/model/accountType';
 import { CardType } from 'src/app/model/cardType';
+import { AccountType } from 'src/app/model/accountType';
+import { EmployeeType } from 'src/app/model/employeeType';
 import { AppServiceService } from '../../service/app-service.service';
-import { Status } from 'src/app/model/status';
+import { Gender } from 'src/app/model/gender';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { VerfierDialogComponent } from '../../verfier/verfier-dialog/verfier-dialog.component';
 
 @Component({
-  selector: 'app-verfier-dialog',
-  templateUrl: './verfier-dialog.component.html',
-  styleUrls: ['./verfier-dialog.component.css']
+  selector: 'app-rework-dialog',
+  templateUrl: './rework-dialog.component.html',
+  styleUrls: ['./rework-dialog.component.css']
 })
-export class VerfierDialogComponent implements OnInit {
+export class ReworkDialogComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<VerfierDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private service: AppServiceService) { }
-  employeeForm;
-  customerForm;
+    
   applicationForm;
-  genders: string[] = new Array();
-  employeeTypes: string[] = new Array();
-  accountTypes: String[] = new Array();
-  cardTypes: string[] = new Array();
-  usAmount = 0;
-  errorFlagEmployee;
+  customerForm;
+  employeeForm;
   errrorflagCustomer;
-  errorFlagApplication;
-
+  genders: string[] = new Array();
+  employeeTypes: string[]= new Array();
+  accountTypes: string[]= new Array();
+  cardTypes: string[]= new Array();
+  application: Application;
   ngOnInit(): void {
     this.employeeForm = this.fb.group({
-      employeeId: [{ value: '', disabled: true }],
+      employeeId: [''],
       firstName: [{ value: '', disabled: true }],
-      designation: [{ value: '', disabled: true }, Validators.required],
-      employeeType: [{ value: '', disabled: true }],
-      salary: [{ value: '', disabled: true }, [Validators.required]]
+      designation: ['', Validators.required],
+      employeeType: [''],
+      salary: ['', [Validators.required]]
     });
 
     this.customerForm = this.fb.group({
-      customerId: [{ value: '', disabled: true }],
-      firstName: [{ value: '', disabled: true }, [Validators.required]],
-      middleName: [{ value: '', disabled: true }],
-      lastName: [{ value: '', disabled: true }],
+      customerId: [''],
+      firstName: ['', [Validators.required]],
+      middleName: [''],
+      lastName: [''],
       employee: this.employeeForm,
-      gender: [{ value: '', disabled: true }, Validators.required],
-      age: [{ value: '', disabled: true }, [Validators.required, Validators.pattern('[0-9]{0,2}')]],
-      correspondenceAddress: [{ value: '', disabled: true }, Validators.required],
-      presentAddress: [{ value: '', disabled: true }, Validators.required],
-      permanentAddress: [{ value: '', disabled: true }, Validators.required]
+      gender: ['', Validators.required],
+      age: ['', [Validators.required, Validators.pattern('[0-9]{0,2}')]],
+      correspondenceAddress: ['', Validators.required],
+      presentAddress: ['', Validators.required],
+      permanentAddress: ['', Validators.required]
     });
 
     this.applicationForm = this.fb.group({
-      accountType: [{ value: '', disabled: true }, [Validators.required]],
-      applicationNo: [{ value: '', disabled: true }],
+      applicationNo: [""],
       customer: this.customerForm,
-      cardType: [{ value: '', disabled: true }, [Validators.required]],
-      overeseasAccount: [{ value: '', disabled: true }, Validators.required],
+      accountType: ["", [Validators.required]],
+      cardType: ["", [Validators.required]],
+      overeseasAccount: ["", Validators.required],
       createUser: [{ value: '', disabled: true }],
       createDate: [{ value: '', disabled: true }],
       lastModifiedUser: [{ value: '', disabled: true }],
@@ -65,47 +63,38 @@ export class VerfierDialogComponent implements OnInit {
       status: [{ value: '', disabled: true }]
     });
 
-    this.applicationForm.get('applicationNo')
+
     for (let item in Gender) {
+      
       if (isNaN(Number(item))) {
         this.genders.push(item)
       }
     }
-
     this.service.getAllEmployeeType().subscribe(data => {
-      data.forEach(da => {
+      data.forEach(da=>{
         this.employeeTypes.push(da.employeeTypeName);
-      });
+      })
     })
-
     this.service.getAllAccountType().subscribe(data => {
-      console.log(data);
-      data.forEach(da => {
-        console.log(da)
+      data.forEach(da=>{
         this.accountTypes.push(da.accountTypeName);
-      });
+      })
     })
-    
     this.service.getAllCardType().subscribe(data => {
-      data.forEach(da => {
+      data.forEach(da=>{
         this.cardTypes.push(da.cardTypeName);
-      });
-
+      })
     })
-
-
+    console.log(this.genders)
+    
     const application = this.data.application;
-    console.log(application)
     application.overeseasAccount = application.overeseasAccount.toString();
     this.applicationForm.setValue(application);
     this.applicationForm.get('accountType').setValue(this.applicationForm.get('accountType').value.accountTypeName);
     this.applicationForm.get('cardType').setValue(this.applicationForm.get('cardType').value.cardTypeName)
     this.employeeForm.get('employeeType').setValue(this.employeeForm.get('employeeType').value.employeeTypeName)
-
-    console.log();
-    console.log(application.accountType);
-
   }
+
   get firstName() {
     return this.customerForm.get('firstName');
   }
@@ -147,27 +136,47 @@ export class VerfierDialogComponent implements OnInit {
   get overeseasAccount() {
     return this.applicationForm.get('overeseasAccount')
   }
-
+  onSubmit() {
+    console.log("onsubmit")
+    console.log(this.customerForm.valid);
+    this.employeeForm.get("firstName").setValue(this.customerForm.get("firstName").value)
+    if (!this.customerForm.valid) {
+      this.errrorflagCustomer = true;
+    } else {
+      this.errrorflagCustomer = false;
+    }
+    console.log(this.customerForm.value)
+  }
+  usAmount = 0;
+  errorFlagEmployee;
   updateUSAmount(event) {
     this.usAmount = event.target.value;
   }
-  approve() {
-    this.applicationForm.get("status").setValue(Status.APPROVE);
-    this.dialogRef.close(this.applicationForm.value);
+  onEmployeeSubmit() {
+    console.log(this.customerForm.valid);
+    if (!this.employeeForm.valid) {
+      this.errorFlagEmployee = true;
+    } else {
+      this.errorFlagEmployee = false;
+      console.log(this.customerForm.value)
+
+    }
   }
-  rework() {
-    this.applicationForm.get("status").setValue(Status.REWORK);
-    this.dialogRef.close(this.applicationForm.value);
-  }
-  reject() {
-    this.applicationForm.get("status").setValue(Status.REJECT);
-    this.dialogRef.close(this.applicationForm.value);
-  }
-  cancel() {
-    this.applicationForm.get("status").setValue(Status.CANCEL);
-    this.dialogRef.close(this.applicationForm.value);
-  }
-  getId(index, account: AccountType) {
-    return account.accountTypeId;
+  errorFlagApplication;
+
+  onApplicationSubmit() {
+    console.log("applicationForm", this.applicationForm.valid)
+    console.log(this.applicationForm.value);
+
+    if (!this.applicationForm.valid) {
+      this.errorFlagApplication = true;
+    } else {
+      this.errorFlagApplication = false;
+      console.log(this.applicationForm.value)
+      this.applicationForm.get("createUser").setValue(localStorage.getItem('username'));
+      this.applicationForm.get('createDate').setValue(new Date());
+      this.dialogRef.close(this.applicationForm.value);
+    }
+    console.log(this.errorFlagApplication);
   }
 }

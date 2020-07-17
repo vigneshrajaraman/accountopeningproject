@@ -10,6 +10,7 @@ import { Application } from 'src/app/model/application';
 })
 export class AppServiceService {
   url = "http://localhost:8085";
+  //url ="https://accountopeningproject.herokuapp.com"
   constructor(private http: HttpClient) { }
 
   getAllEmployeeType() {
@@ -28,6 +29,12 @@ export class AppServiceService {
     return this.http.get<Application[]>(this.url + "/dataentry/getAllSubmitApplication");
   }
   setAllVerifierStatus(data) {
-    return this.http.put<Application[]>(this.url + "/dataentry/verfierStatus", data);
+    return this.http.put<Application>(this.url + "/dataentry/verfierStatus", data);
+  }
+  getAllReworkData() {
+    return this.http.get<Application[]>(this.url + "/dataentry/getAllReworkData");
+  }
+  updateApplication(data){
+    return this.http.put<Application>(this.url +"/dataentry/updateApplication", data);
   }
 }

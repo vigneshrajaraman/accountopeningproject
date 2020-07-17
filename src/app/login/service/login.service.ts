@@ -8,11 +8,12 @@ import { Token } from 'src/app/model/token';
 })
 export class LoginService {
   url = "http://localhost:8085";
+  //url ="https://accountopeningproject.herokuapp.com"
   constructor(private http: HttpClient) { }
  
   login(userDetails):Observable<Token>{
     console.log(userDetails)
-    return this.http.post<Token>("http://localhost:8085/login", userDetails)
+    return this.http.post<Token>(this.url+"/login", userDetails)
   }
 
 }

@@ -18,6 +18,8 @@ import { CreateAccountComponent } from './home/body/create-account/create-accoun
 import  {MatCurrencyFormatModule} from 'mat-currency-format';
 import { VerfierComponent } from './home/body/verfier/verfier.component';
 import { VerfierDialogComponent } from './home/body/verfier/verfier-dialog/verfier-dialog.component';
+import { ReworkComponent } from './home/body/rework/rework.component';
+import { ReworkDialogComponent } from './home/body/rework/rework-dialog/rework-dialog.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { VerfierDialogComponent } from './home/body/verfier/verfier-dialog/verfi
     BodyComponent,
     CreateAccountComponent,
     VerfierComponent,
-    VerfierDialogComponent
+    VerfierDialogComponent,
+    ReworkComponent,
+    ReworkDialogComponent
   ],
   imports: [
     BrowserModule,
