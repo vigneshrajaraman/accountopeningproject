@@ -30,15 +30,17 @@ export class ReworkComponent implements OnInit {
   }
 
   openDialog(rowData) {
+    console.log("rowdata", rowData)
     let dialogRef = this.dialog.open(ReworkDialogComponent, {
       data: { application: rowData }
     })
 
-    dialogRef.afterClosed().subscribe(data => {
+    dialogRef.afterClosed().subscribe(da => {
       this.spinnerFlag = true;
-      console.log(data);
-      this.service.updateApplication(data).subscribe((response) => {
+      console.log("REQUESTDA",da);
+      this.service.updateApplication(da).subscribe((response) => {
         this.spinnerFlag = false;
+        console.log(response);
         this.ngOnInit();
 
       })

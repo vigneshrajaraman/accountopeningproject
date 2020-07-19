@@ -16,7 +16,7 @@ import { VerfierDialogComponent } from '../../verfier/verfier-dialog/verfier-dia
 })
 export class ReworkDialogComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<VerfierDialogComponent>,
+  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<ReworkDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private service: AppServiceService) { }
     
   applicationForm;
@@ -56,11 +56,11 @@ export class ReworkDialogComponent implements OnInit {
       accountType: ["", [Validators.required]],
       cardType: ["", [Validators.required]],
       overeseasAccount: ["", Validators.required],
-      createUser: [{ value: '', disabled: true }],
-      createDate: [{ value: '', disabled: true }],
-      lastModifiedUser: [{ value: '', disabled: true }],
-      lastModifiedDate: [{ value: '', disabled: true }],
-      status: [{ value: '', disabled: true }]
+      createUser: [''],
+      createDate: [""],
+      lastModifiedUser: [""],
+      lastModifiedDate: [""],
+      status: [""]
     });
 
 
@@ -88,11 +88,14 @@ export class ReworkDialogComponent implements OnInit {
     console.log(this.genders)
     
     const application = this.data.application;
+    console.log("testing",application)
     application.overeseasAccount = application.overeseasAccount.toString();
     this.applicationForm.setValue(application);
     this.applicationForm.get('accountType').setValue(this.applicationForm.get('accountType').value.accountTypeName);
     this.applicationForm.get('cardType').setValue(this.applicationForm.get('cardType').value.cardTypeName)
     this.employeeForm.get('employeeType').setValue(this.employeeForm.get('employeeType').value.employeeTypeName)
+    console.log("testing1",this.applicationForm.value)
+
   }
 
   get firstName() {
@@ -166,13 +169,12 @@ export class ReworkDialogComponent implements OnInit {
 
   onApplicationSubmit() {
     console.log("applicationForm", this.applicationForm.valid)
-    console.log(this.applicationForm.value);
 
     if (!this.applicationForm.valid) {
       this.errorFlagApplication = true;
     } else {
       this.errorFlagApplication = false;
-      console.log(this.applicationForm.value)
+      console.log("application",this.applicationForm.value)
       this.applicationForm.get("createUser").setValue(localStorage.getItem('username'));
       this.applicationForm.get('createDate').setValue(new Date());
       this.dialogRef.close(this.applicationForm.value);

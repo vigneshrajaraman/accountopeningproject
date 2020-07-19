@@ -35,6 +35,7 @@ export class AppServiceService {
     return this.http.get<Application[]>(this.url + "/dataentry/getAllReworkData");
   }
   updateApplication(data){
+    console.log("Service Request",data)
     return this.http.put<Application>(this.url +"/dataentry/updateApplication", data);
   }
 }
