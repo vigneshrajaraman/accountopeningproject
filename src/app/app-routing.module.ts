@@ -6,6 +6,7 @@ import { AuthService } from './Auth/auth.service';
 import { CreateAccountComponent } from './home/body/create-account/create-account.component';
 import { VerfierComponent } from './home/body/verfier/verfier.component';
 import { ReworkComponent } from './home/body/rework/rework.component';
+import { SearchComponent } from './home/body/search/search.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,9 @@ const routes: Routes = [
   {path:"aoa", component:HomeComponent, canActivate:[AuthService], children:[
     {path:"create", component: CreateAccountComponent,canActivate:[AuthService]},
     {path:"verifier", component: VerfierComponent,canActivate:[AuthService]},
-    {path:"rework", component: ReworkComponent,canActivate:[AuthService]}
+    {path:"rework", component: ReworkComponent,canActivate:[AuthService]},
+    {path:"search", component: SearchComponent,canActivate:[AuthService]}
+
   ]}
 ];
 

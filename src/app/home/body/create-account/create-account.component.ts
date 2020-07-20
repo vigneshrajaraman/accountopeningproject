@@ -10,6 +10,7 @@ import { EmployeeType } from 'src/app/model/employeeType';
 import { AccountType } from 'src/app/model/accountType';
 import { CardType } from 'src/app/model/cardType';
 import { Application } from 'src/app/model/application';
+import { CountService } from '../service/count.service';
 
 @Component({
   selector: 'app-create-account',
@@ -22,7 +23,7 @@ import { Application } from 'src/app/model/application';
 })
 export class CreateAccountComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private service: AppServiceService) { }
+  constructor(private fb: FormBuilder, private service: AppServiceService, private count:CountService) { }
   applicationForm;
   customerForm;
   employeeForm;
@@ -167,6 +168,12 @@ export class CreateAccountComponent implements OnInit {
       this.applicationForm.get("createUser").setValue(localStorage.getItem('username'));
       this.applicationForm.get('createDate').setValue(new Date());
       this.service.insertApplication(this.applicationForm.value).subscribe(data => {
+        this.service.getCountRework().subscribe(data=>{
+          this.service.getCountVerifier().subscribe(data1=>{
+            this.count.setReworkCount(data);
+            this.count.setverifierCount(data1);
+          })
+        })
         this.enableSpinner = false;
         console.log(data)
         this.application = data;

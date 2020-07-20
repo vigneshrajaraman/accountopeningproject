@@ -38,4 +38,10 @@ export class AppServiceService {
     console.log("Service Request",data)
     return this.http.put<Application>(this.url +"/dataentry/updateApplication", data);
   }
+  getCountRework(){
+    return this.http.get<Number>(this.url + "/dataentry/getCountRework");
+  }
+  getCountVerifier(){
+    return this.http.get<Number>(this.url + "/dataentry/getCountVerifier");
+  }
 }

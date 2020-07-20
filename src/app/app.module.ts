@@ -20,6 +20,7 @@ import { VerfierComponent } from './home/body/verfier/verfier.component';
 import { VerfierDialogComponent } from './home/body/verfier/verfier-dialog/verfier-dialog.component';
 import { ReworkComponent } from './home/body/rework/rework.component';
 import { ReworkDialogComponent } from './home/body/rework/rework-dialog/rework-dialog.component';
+import { SearchComponent } from './home/body/search/search.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ReworkDialogComponent } from './home/body/rework/rework-dialog/rework-d
     VerfierComponent,
     VerfierDialogComponent,
     ReworkComponent,
-    ReworkDialogComponent
+    ReworkDialogComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

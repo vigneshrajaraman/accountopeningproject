@@ -1,0 +1,15 @@
+mat-form-field,mat-radio-group {
+    width: 30%;
+    margin: 10px;
+}
+mat-radio-button,button{
+    margin: 10px;
+
+}
+table{
+    width: 90%;
+    margin-top: 3%;
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+}
