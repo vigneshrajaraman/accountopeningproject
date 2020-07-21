@@ -6,6 +6,7 @@ import { VerfierDialogComponent } from '../verfier/verfier-dialog/verfier-dialog
 import { MatTableDataSource } from '@angular/material/table';
 import { ReworkDialogComponent } from './rework-dialog/rework-dialog.component';
 import { CountService } from '../service/count.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-rework',
@@ -17,6 +18,7 @@ export class ReworkComponent implements OnInit {
   dataSource;
   spinnerFlag;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   displayedColumns = ['applicationNo', 'customer.firstName', 'accountType', 'status', 'open'];
 
@@ -26,6 +28,8 @@ export class ReworkComponent implements OnInit {
     this.service.getAllReworkData().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+
     })
 
   }
@@ -41,9 +45,8 @@ export class ReworkComponent implements OnInit {
       console.log("REQUESTDA", da);
       this.service.updateApplication(da).subscribe((response) => {
         this.service.getCountVerifier().subscribe(data => {
-          this.count.setverifierCount(data);
-          console.log(data)
           this.service.getCountRework().subscribe(data1 => {
+            this.count.setverifierCount(data);
             this.count.setReworkCount(data1);
             this.spinnerFlag = false;
             console.log(response);

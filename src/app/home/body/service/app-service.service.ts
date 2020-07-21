@@ -44,4 +44,7 @@ export class AppServiceService {
   getCountVerifier(){
     return this.http.get<Number>(this.url + "/dataentry/getCountVerifier");
   }
+  search(data){
+    return this.http.patch<Application[]>(this.url + "/dataentry/Search", data);
+  }
 }

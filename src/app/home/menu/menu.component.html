@@ -8,13 +8,13 @@
     </div>
     <div *ngIf="role.includes('ROLE_dataentery')">
         <mat-list-item>
-            <a mat-flat-button routerLink="rework" style="color:#ff4081;" ><b><span matBadgeOverlap="false" matBadgeHidden="{{reworkCount==0?'true':'false'}}" [matBadge]="reworkCount" matBadgePosition="after">Rework</span></b></a>
+            <a mat-flat-button routerLink="rework" style="color:#ff4081;" ><b><span matBadgeOverlap="false" matBadgeHidden="{{reworkCount==0?'true':'false'}}" [matBadge]="reworkCount" matBadgePosition="after above">Rework</span></b></a>
         </mat-list-item>
         <mat-divider></mat-divider>
     </div>
     <div *ngIf="role.includes('ROLE_dataverifier')">
         <mat-list-item> 
-            <a mat-flat-button routerLink="verifier" style="color:#ff4081;" ><b><span matBadgeOverlap="false" matBadgeHidden="{{verifierCount==0?'true':'false'}}" [matBadge]="verifierCount" matBadgePosition="after">Verify</span></b></a>
+            <a mat-flat-button routerLink="verifier" style="color:#ff4081;" ><b><span matBadgeOverlap="false" matBadgeHidden="{{verifierCount==0?'true':'false'}}" [matBadge]="verifierCount" matBadgePosition="after above">Verify</span></b></a>
         </mat-list-item>
         <mat-divider></mat-divider>
     </div>

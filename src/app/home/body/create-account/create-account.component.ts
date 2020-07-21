@@ -61,11 +61,11 @@ export class CreateAccountComponent implements OnInit {
       accountType: ["", [Validators.required]],
       cardType: ["", [Validators.required]],
       overeseasAccount: ["", Validators.required],
-      createUser: [{ value: '', disabled: true }],
-      createDate: [{ value: '', disabled: true }],
-      lastModifiedUser: [{ value: '', disabled: true }],
-      lastModifiedDate: [{ value: '', disabled: true }],
-      status: [{ value: '', disabled: true }]
+      createUser: [""],
+      createDate: [""],
+      lastModifiedUser: [""],
+      lastModifiedDate: [""],
+      status: [""]
     });
 
 
@@ -167,11 +167,14 @@ export class CreateAccountComponent implements OnInit {
       this.enableSpinner = true;
       this.applicationForm.get("createUser").setValue(localStorage.getItem('username'));
       this.applicationForm.get('createDate').setValue(new Date());
+      this.applicationForm.get('status').setValue(Status.SUBMIT);
+
+      console.log(this.applicationForm.value)
       this.service.insertApplication(this.applicationForm.value).subscribe(data => {
         this.service.getCountRework().subscribe(data=>{
           this.service.getCountVerifier().subscribe(data1=>{
-            this.count.setReworkCount(data);
             this.count.setverifierCount(data1);
+            this.count.setReworkCount(data);
           })
         })
         this.enableSpinner = false;
